@@ -19,20 +19,20 @@ tf_vectorizer = CountVectorizer(
     # set up your CountVectorizer
     tokenizer=lambda text: [
         token.text for token in nlp(text)
-        if not token.is-stop and not token.is_punct
+        if not token.is_stop and not token.is_punct
     ],
-    max_df=8, #.8 * 25000
-    min_df=10,
-    max_features=1000, 
+    max_df=.8,    # 0.8(float) * 25,000
+    min_df=25,    # 25(int) out of 25,000
+    max_features=1000, #top 1000 tokens
 )
 tf = tf_vectorizer.fit_transform(data["review"])
 
 lda = LatentDirichletAllocation(
     # set up your LatentDirichletAllocation
-    n_components=20,
+    n_components=20,     # 20 out of 25,000 can be any other number
     learning_method="online",
     learning_offset=50,
-    random_state=2020, 
+    random_state=2020,
 )
 lda.fit(tf)
 

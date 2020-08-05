@@ -24,8 +24,8 @@ from tqdm.autonotebook import tqdm
 data = pd.read_csv("train.csv")
 sentences = []
 for review in tqdm (data["review"]):
-    for sent in doc.sents:
     doc = nlp(review, disable=["tagger", "ner"]) # tagger  part of speech tag,
+    for sent in doc.sents:
         sentences.append(
             [t.text for t in sent]
         )
@@ -39,3 +39,6 @@ for token1, token2 in combinations(text.split(), 2):
     print(
         f"similarity between {token1} and {token2} is {model.wv.similarity(token1, token2)}"
     )
+
+
+# %%
